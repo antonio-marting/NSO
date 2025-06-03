@@ -1,0 +1,70 @@
+sudo docker run -itd --name nso_prod_5.3 -e ADMIN_PASSWORD=admin cisco-nso-base:5.3
+docker run -itd --name nso_prod_6.4.4 --privileged=true -e ADMIN_PASSWORD=admin -p 8080:8080 -p 9080:80 --expose 22 --expose 8080 --expose 443 --expose 80  cisco-nso-prod:6.4.4
+
+sudo docker exec -it nso_prod_5.3 bash
+ssh -v -oHostKeyAlgorithms=+ssh-rsa admin@172.17.0.2
+SSH Host Key Algorithms:
+    devices global-settings ssh-algorithms public-key [ ssh-ed25519 ecdsa-sha2-nistp256 ecdsa-sha2-nistp384 ecdsa-sha2-nistp521 rsa-sha2-512 rsa-sha2-256 ssh-rsa ssh-dss  ]
+
+ncs.conf:
+<webui>
+    <enabled>true</enabled>
+        <transport>
+        <tcp>
+            <enabled>true</enabled>
+...
+    <local-authentication>
+      <enabled>true</enabled>
+
+
+ncs_cli -C -u admin
+
+sudo docker cp nso_prod_5.3:/etc/ncs/ncs.conf .
+sudo docker cp ncs.conf nso_prod_5.3:/etc/ncs/ncs.conf 
+------ NSC Python module ----------
+    /opt/ncs/ncs-5.3/src/ncs/pyapi/ncs
+
+/opt/ncs/ncs-5.3
+/etc/ncs/ncs.conf
+
+packages Folder:
+    ls -ltr /opt/ncs/packages/
+
+------------- INSTALL NEDs ---------------
+copy NED to:
+    cd /tmp/ned-package-store
+    chmod u+x ncs-5.3.0.1-cisco-ios-6.43.4E.signed.bin
+    ./ncs-5.3.0.1-cisco-ios-6.43.4E.signed.bi
+    ./ncs-5.3.0.1-cisco-ios-6.43.4E.signed.bi --skip-verification >>> SOLO SI NO SE PUEDE VERIFICAR
+entrar al NSO cli:
+    admin@ncs# software packages fetch package-from-file /tmp/ned-package-store/ncs-5.3.0.1-cisco-ios-6.43.4.tar.gz
+    ls -ltr /opt/ncs/packages/
+----
+        SI el comando anterior falla, copiar el fichero de la NED.tar.gz en el directorio /opt/ncs/packages/
+            mv /tmp/ned-package-store/ncs-5.3.0.1-cisco-ios-6.43.4.tar.gz /opt/ncs/packages/
+----
+    admin@ncs# software packages list
+    admin@ncs# software packages install package ncs-6.4.4-cisco-iosxr_netconf-25.1.1.tar.gz
+    admin@ncs# software packages list
+    admin@ncs# packages reload
+    admin@ncs# software packages list
+netsim:
+-------------- NET-SIM ---------------------
+tar -xzvf /opt/ncs/packages/ncs-5.3.0.1-cisco-ios-6.43.4.tar.gz /opt/ncs/ncs-5.3/packages
+tar -xzvf /opt/ncs/packages/ncs-5.3.1-cisco-iosxr_netconf-7.0.2.tar.gz cisco-iosxr-nc-7.0
+ncs-netsim create-device /opt/ncs/ncs-5.3/packages/cisco-ios-cli-6.43 ios-router-01
+ncs-netsim add-device /opt/ncs/ncs-5.3/packages/cisco-ios-cli-6.43 ios-router-02
+ncs-netsim add-device /opt/ncs/ncs-5.3/packages/cisco-iosxr-nc-7.0 xr-router-03
+ncs-netsim add-device /opt/ncs/ncs-5.3/packages/cisco-iosxr-nc-7.0 xr-router-04
+ncs-netsim ncs-xml-init > devices.xml
+cd /opt/ncs/ncs-5.3/packages/
+ncs-netsim start
+ncs_load -l -m devices.xml
+ncs-netsim list
+ncs-netsim cli-c ios-router-01
+----- Para ver el usernam/password en el device de netsim ---
+    more netsim/xr-router-03/xr-router-03/cdb/aaa_init.xml
+
+ncs-netsim stop
+
+show trace file ned-cisco-ios-PE11.trace

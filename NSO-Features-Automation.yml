@@ -1,0 +1,73 @@
+#-------- NSO Features Automation --------
+
+- EXEC:
+  - devices:
+    - device['device-name'] & device-group::
+      - check-sync
+      - sync-from
+      - ssh/fetch-ssh-host-keys
+      - live-status:
+        - show - exec <command>
+        - config - exec <command> ---> *Pending*
+  
+- SHOW:
+  - alarms:
+    - alarm-list
+    - summary
+  - authgroups:
+          trans = m.start_write_trans()
+          root = ncs.maagic.get_root(trans)
+          root.ncs__devices.authgroups.group.create('test')
+          root.ncs__devices.authgroups.group['test'].default_map.create()
+          root.ncs__devices.authgroups.group['test'].default_map.same_user.create()
+          root.ncs__devices.authgroups.group['test'].default_map.same_pass.create()
+          trans.apply()
+  - cli:
+  - configuration:
+    - commit:
+      - changes
+      - list
+    - rollback:
+      - changes
+  - devices:
+    - device:
+      - ['device-name']:
+        - config:
+          - any*
+        - platform:
+          - model
+        - service-list:
+    - device-group:
+    - list:
+  - ncs-state:
+    - version
+  - packages:
+    - packages:
+      - package-version
+      - oper-status
+  - running-config:
+    - device:
+      - ['device-name']:
+        - config:
+          - any*
+
+- CONFIG:
+  - devices:
+    - device['device-name']:
+      - config:
+        - any*
+  - nacm:
+  - commit:
+    - dry-run
+    - no_networking
+  - rollback:
+
+- PACKAGES & SERVICES:
+  - NEXT-LEVEL UPCOMING
+
+- FRAMEWORK:
+  - DJANGO + SQL
+  
+- MONITORING:
+  - TIG (TELEGRAF, INFLUXDB, GRAFANA)
+  - ELK (ELASTICSEARCH, LOGSTASH, KIBANA)
