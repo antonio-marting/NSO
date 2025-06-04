@@ -1,26 +1,20 @@
-import ncs
+import ncs, _ncs
 
-#device_name = 'ios-router-01'
-device_name = 'EDC2'
-#device_name = 'xr-router-03'
+''' This script lists the rollbacks available in the NCS system.'''
 
-with ncs.maapi.single_write_trans('admin', 'python') as t:
-    root = ncs.maagic.get_root(t)
-    device = root.devices
-
-    commit_params = ncs.maapi.CommitParams()
-
-    commit_params
-
-
-    '''
-    commit_params = ncs.maapi.CommitParams()
-
-    commit_params.dry_run_cli()
-    commit = t.apply_params(True, commit_params)
-    print("Commiting Dry-Run NSO CLI Style: ")
-    print(commit)
-    print (commit.get("local-node"))
-    '''
-
-
+with ncs.maapi.single_read_trans('admin', 'python') as t:
+    rollbacks = _ncs.maapi.list_rollbacks(t.maapi.msock, 100)
+    
+    for rollback in rollbacks:
+        print(f'--------- ROLLBACK {rollback.nr} -------------')
+        print(rollback)
+        
+        print('Comment:', rollback.comment)
+        print('Label:', rollback.label)
+        print('user: ', rollback.creator)
+        print('method: ', rollback.via)
+        print('Fixed-number: ', rollback.fixed_nr)
+        print('date: ', rollback.datestr)
+        
+            
+    

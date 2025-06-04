@@ -22,7 +22,8 @@ ncs_cli -C -u admin
 sudo docker cp nso_prod_5.3:/etc/ncs/ncs.conf .
 sudo docker cp ncs.conf nso_prod_5.3:/etc/ncs/ncs.conf 
 ------ NSC Python module ----------
-    /opt/ncs/ncs-5.3/src/ncs/pyapi/ncs
+    /opt/ncs/ncs-6.4.4/src/ncs/pyapi/ncs
+    /opt/ncs/ncs-6.4.4/src/ncs/pyapi/pysrc/
 
 /opt/ncs/ncs-5.3
 /etc/ncs/ncs.conf

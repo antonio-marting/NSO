@@ -2,13 +2,13 @@
 
 - EXEC:
   - devices:
-    - device['device-name'] & device-group::
-      - check-sync
-      - sync-from
-      - ssh/fetch-ssh-host-keys
+    - device['device-name'] & device-group:
+      - check-sync ----> Done !
+      - sync-from ----> Done !
+      - ssh/fetch-ssh-host-keys ----> Done !
       - live-status:
-        - show - exec <command>
-        - config - exec <command> ---> *Pending*
+        - show - exec <command> ----> Done !
+        - config - exec <command> ----> *Pending*
   
 - SHOW:
   - alarms:
@@ -26,7 +26,7 @@
     - device:
       - ['device-name']:
         - config:
-          - any*
+          - any* ----> Done !
         - platform:
           - model
         - service-list:
@@ -47,14 +47,14 @@
 
 - CONFIG:
   - devices:
-    - authgroups:
+    - authgroups: ----> Done !
     - device['device-name']:
       - config:
         - any*
   - nacm:
   - commit:
-    - dry-run      
-    - no_networking
+    - dry-run ----> Done !     
+    - no_networking ----> Done !
   - rollback:
 
 - PACKAGES & SERVICES:

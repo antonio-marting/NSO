@@ -9,22 +9,20 @@ with ncs.maapi.single_write_trans('admin', 'python') as t:
 
     device = root.devices.device[device_name].config
 
+    #del device.interface.Loopback['44']
+    #t.apply()
+
     ''' To Create a new Loopback and configure'''
     device.interface.Loopback.create('44')
     device.interface.Loopback['44'].ip.address.primary.address = "44.44.44.44"
     device.interface.Loopback['44'].ip.address.primary.mask = "255.255.255.255"
     device.interface.Loopback['44'].description = "created by NSC.MAAPI Python script"
-
-    ''' Commit the changes in Dry-Run Mode '''
+    
+    ''' Commit the changes in no-networking Mode '''
     commit_params = ncs.maapi.CommitParams()
-    commit_params.dry_run_cli()
+    commit_params.no_networking()
     commit = t.apply_params(True, commit_params)
     
-    print("Commiting Dry-Run NSO CLI Style: ")
-    print(commit)
-    print (commit.get("local-node"))
-
-
-    print(''' Diferent options for .get() method ''')
-    for entry in commit:
-        print(f'Commit result: {entry}')
+    print("Commiting NSO NO-NetWorking ... ")
+    print(commit, 'Changes Committed Successfully as no-networking')
+    
