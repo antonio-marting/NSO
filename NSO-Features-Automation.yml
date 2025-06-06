@@ -3,14 +3,14 @@
 - EXEC:
   - devices:
     - device['device-name'] & device-group:
-      - check-sync ----> Done !
-      - sync-from ----> Done !
-      - ssh/fetch-ssh-host-keys ----> Done !
+      - check-sync  # ----> Done !
+      - sync-from  # ----> Done !
+      - ssh/fetch-ssh-host-keys  # ----> Done !
       - live-status:
-        - show - exec <command> ----> Done !
-        - config - exec <command> ----> *Pending*
+        - show - exec <command>  # ----> Done !
+        - config - exec <command>  # ----> *Pending*
   
-- SHOW:
+- SHOW: 
   - alarms:
     - alarm-list
     - summary
@@ -21,7 +21,8 @@
       - changes
       - list
     - rollback:
-      - changes
+      - changes # ----> Done !
+      - detailed configuration to rollback
   - devices:
     - device:
       - ['device-name']:
@@ -32,7 +33,7 @@
         - service-list:
     - authgroups:
     - device-group:
-    - list:
+    - listing devices:
   - ncs-state:
     - version
   - packages:
@@ -47,16 +48,22 @@
 
 - CONFIG:
   - devices:
-    - authgroups: ----> Done !
-    - device['device-name']:
+    - authgroups  # ----> Done !
+    - device-group: 
+      - adding device to device-group   # ----> Done !
+      - device-group single  # ----> Done !
+      - device-group inside device-group  # ----> Done !
+      - device-group complete estructure  # ----> Done !
+      
+    - device['device-name'] create:
       - config:
         - any*
   - nacm:
   - commit:
-    - dry-run ----> Done !     
-    - no_networking ----> Done !
+    - dry-run  # ----> Done !     
+    - no_networking  # ----> Done !
   - rollback:
-
+    - perform a rollback
 - kickers:
 
 - PACKAGES & SERVICES:
