@@ -31,9 +31,9 @@
         - platform:
           - model
         - service-list:
-    - authgroups:
-    - device-group:
-    - listing devices:
+    - authgroups:   # ----> Done !
+    - device-group:   # ----> Done !
+    - listing devices:   # ----> Done !
   - ncs-state:
     - version
   - packages:
