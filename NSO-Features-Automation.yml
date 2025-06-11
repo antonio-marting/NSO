@@ -56,6 +56,9 @@
     - user-groups  # ----> Done !
     - rule-lists  # ----> Done !
     - rule-actions  # ----> Done !
+  - ha:
+    - status
+    - summary
 
 - CONFIG:
   - aaa:
@@ -66,9 +69,8 @@
       - adding device to device-group   # ----> Done !
       - device-group single  # ----> Done !
       - device-group inside device-group  # ----> Done !
-      - device-group complete estructure  # ----> Done !
-      
-    - device['device-name'] create:
+      - device-group complete estructure  # ----> Done !      
+    - device['device-name'] create: # ----> Done !  
       - config:
         - any*
     - nacm:
