@@ -9,8 +9,6 @@ with ncs.maapi.single_read_trans('admin', 'python') as t:
 
     ''' Listar los devices en NSO y mostrar sus atributos '''
     for entry in device:
-
-
         print(entry.name)
         print('    IPv4: >', entry.address)
         print('    Auth_grp: >', entry.authgroup)

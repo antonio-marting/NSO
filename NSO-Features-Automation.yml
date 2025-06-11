@@ -8,9 +8,11 @@
       - ssh/fetch-ssh-host-keys  # ----> Done !
       - live-status:
         - show - exec <command>  # ----> Done !
-        - config - exec <command>  # ----> *Pending*
+        - config - exec <command>  !!!!!# ----> *Pending*
   
 - SHOW: 
+  - aaa:
+    - users  # ----> Done !
   - alarms:
     - alarm-list
     - summary
@@ -21,16 +23,20 @@
       - changes
       - list
     - rollback:
-      - changes # ----> Done !
+      - changes  # ----> Done !
       - detailed configuration to rollback
   - devices:
     - device:
-      - ['device-name']:
+      - ['device-name']:  # ----> Done !
         - config:
-          - any* ----> Done !
+          - any* ---->  # ----> Done !
         - platform:
-          - model
-        - service-list:
+          - model   # ----> Done !
+          - version   # ----> Done !
+          - serial number    # ----> Done !
+          - alarms summary    # ----> Done !
+        - service-list: !!!!!Cuando haya servicios definidos
+        - services: !!!!!Cuando haya servicios definidos
     - authgroups:   # ----> Done !
     - device-group:   # ----> Done !
     - listing devices:   # ----> Done !
@@ -42,11 +48,18 @@
       - oper-status
   - running-config:
     - device:
-      - ['device-name']:
+      - ['device-name']:  # ----> Done !
         - config:
-          - any*
+          - any*  # ----> Done !
+  - nacm:
+    - users  # ----> Done !
+    - user-groups  # ----> Done !
+    - rule-lists  # ----> Done !
+    - rule-actions  # ----> Done !
 
 - CONFIG:
+  - aaa:
+    - create users  # ----> Done !
   - devices:
     - authgroups  # ----> Done !
     - device-group: 
@@ -58,12 +71,18 @@
     - device['device-name'] create:
       - config:
         - any*
-  - nacm:
+    - nacm:
+      - users  # ----> Done !
+      - user-groups  # ----> Done !
+      - user-groups-asgined  # ----> Done !
+      - rule-lists  # ----> Done !
+      - rule-actions        # ----> Done !
   - commit:
     - dry-run  # ----> Done !     
     - no_networking  # ----> Done !
   - rollback:
     - perform a rollback
+  - ha:
 - kickers:
 
 - PACKAGES & SERVICES:
