@@ -2,7 +2,7 @@ import ncs
 
 ''' This script SHOW the NCS Version, NED installer and package version.'''
 
-with ncs.maapi.single_read_trans('admin', 'python') as t:
+with ncs.maapi.single_write_trans('admin', 'python') as t:
     root = ncs.maagic.get_root(t)
 
     print('NCS Version:', root.tfnm__ncs_state.tfnm__version)
@@ -14,7 +14,7 @@ with ncs.maapi.single_read_trans('admin', 'python') as t:
 
     print('Internal CDB DataStore Info:')    
     for datastore in root.tfnm__ncs_state.tfnm__internal.tfnm__cdb.tfnm__datastore:
-        print('Datastore Name:', datastore.name)
+        print('  Datastore Name:', datastore.name)
         print('     disk size:', datastore.disk_size)
         print('     ram size:', datastore.ram_size)
         print('     transaction id:', datastore.transaction_id)
@@ -25,6 +25,11 @@ with ncs.maapi.single_read_trans('admin', 'python') as t:
     
     print('Internal PACKAGES Info:')   
     for package in root.ncs__packages.ncs__package:
-        print('     ', package.name, package.package_version, package.directory, package.oper_status.ncs__status, package.oper_status.ncs__error_info)
-
-
+        print('     ', package.name, package.package_version, package.directory, package.oper_status.ncs__status)
+    
+    print('Internal PACKAGES Errors: ')
+    for package in root.ncs__packages.ncs__package:
+        if not package.oper_status.ncs__error_info:
+            print(f'      {package.name} --> No errors found...')
+        else:
+            print(package.name, package.oper_status.ncs__error_info)
