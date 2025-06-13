@@ -5,17 +5,22 @@ sudo docker exec -it nso_prod_5.3 bash
 ssh -v -oHostKeyAlgorithms=+ssh-rsa admin@172.17.0.2
 SSH Host Key Algorithms:
     devices global-settings ssh-algorithms public-key [ ssh-ed25519 ecdsa-sha2-nistp256 ecdsa-sha2-nistp384 ecdsa-sha2-nistp521 rsa-sha2-512 rsa-sha2-256 ssh-rsa ssh-dss  ]
-
 ncs.conf:
-<webui>
-    <enabled>true</enabled>
-        <transport>
-        <tcp>
-            <enabled>true</enabled>
-...
+    <webui>
+        <enabled>true</enabled>
+            <transport>
+            <tcp>
+                <enabled>true</enabled>
+
     <local-authentication>
       <enabled>true</enabled>
-
+API-HELP:
+    man confd_lib
+    pydoc3 (examples)
+            pydoc3 ncs.application
+            pydoc3 _ncs
+            pydoc3 _ncs.maapi
+            pydoc3 _ncs.cdb
 
 ncs_cli -C -u admin
 
@@ -25,7 +30,7 @@ sudo docker cp ncs.conf nso_prod_5.3:/etc/ncs/ncs.conf
     /opt/ncs/ncs-6.4.4/src/ncs/pyapi/ncs
     /opt/ncs/ncs-6.4.4/src/ncs/pyapi/pysrc/
 
-/opt/ncs/ncs-5.3
+/opt/ncs/ncs-6.4.4
 /etc/ncs/ncs.conf
 
 packages Folder:
