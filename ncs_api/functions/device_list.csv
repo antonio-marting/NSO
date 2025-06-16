@@ -1,0 +1,9 @@
+name;address;description;authgroup;dev_grp;ned;admin-state;vendor
+def_pd_xr_01;192.168.2.217;def_pd_xr_01;cisco-ios-xr;IOS_XR;netconf;unlocked;iosxr
+def_pd_xr_02;192.168.2.217;def_pd_xr_02;cisco-ios-xr;IOS_XR;netconf;unlocked;iosxr
+def_pd_xr_03;192.168.2.217;def_pd_xr_03;cisco-ios-xr;IOS_XR;netconf;unlocked;iosxr
+def_pd_xr_04;192.168.2.217;def_pd_xr_04;cisco-ios-xr;IOS_XR;netconf;unlocked;iosxr
+def_pd_xe_01;192.168.2.210;def_pd_xe_01;cisco-ios-xe;IOS_XE;cli;unlocked;iosxe
+def_pd_xe_02;192.168.2.210;def_pd_xe_02;cisco-ios-xe;IOS_XE;cli;unlocked;iosxe
+def_pd_xe_03;192.168.2.210;def_pd_xe_03;cisco-ios-xe;IOS_XE;cli;unlocked;iosxe
+def_pd_xe_04;192.168.2.210;def_pd_xe_04;cisco-ios-xe;IOS_XE;cli;unlocked;iosxe
