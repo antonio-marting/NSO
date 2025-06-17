@@ -14,8 +14,8 @@
   - aaa:
     - users  # ----> Done !
   - alarms:
-    - alarm-list
-    - summary
+    - alarm-list  # ----> Done !
+    - summary  # ----> Done !
   - authgroups:
   - cli:
   - configuration:
@@ -41,11 +41,11 @@
     - device-group:   # ----> Done !
     - listing devices:   # ----> Done !
   - ncs-state:
-    - version
+    - version  # ----> Done !
   - packages:
     - packages:
-      - package-version
-      - oper-status
+      - package-version  # ----> Done !
+      - oper-status  # ----> Done !
   - running-config:
     - device:
       - ['device-name']:  # ----> Done !
@@ -72,7 +72,7 @@
       - device-group complete estructure  # ----> Done !      
     - device['device-name'] create: # ----> Done !  
       - config:
-        - any*
+        - any*  # ----> Done !
     - nacm:
       - users  # ----> Done !
       - user-groups  # ----> Done !
