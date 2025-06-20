@@ -1,6 +1,6 @@
 import ncs
 
-''' This script list the Rollback changes availables in NSO'''
+''' This script list the Rollback changes list available in NSO'''
 
 with ncs.maapi.single_read_trans('admin', 'python') as t:
     root = ncs.maagic.get_root(t)
@@ -9,6 +9,6 @@ with ncs.maapi.single_read_trans('admin', 'python') as t:
     
     for roll_file in rollback_listing:
         if roll_file.label or roll_file.comment != None:
-            print('{0:10} | change# {1:7} | id: {2:3} | Label: {3:40} | Comment: {4:40}'.format(roll_file.name, roll_file.fixed_number, roll_file.id, roll_file.label, roll_file.comment))        
+            print('change# {0:7} |  id: {1:3} |  date: {2:20} | Label: {3:40} | Comment: {4:40}'.format(roll_file.fixed_number, roll_file.id, roll_file.date, roll_file.label, roll_file.comment))      
         else:
-            print('{0:10} | change# {1:7} | id: {2:3} | Label: {3:40} | Comment: {4:40}'.format(roll_file.name, roll_file.fixed_number, roll_file.id, 'None', 'None'))
+            print('change# {0:7} |  id: {1:3} |  date: {2:20} | Label: {3:40} | Comment: {4:40}'.format(roll_file.fixed_number, roll_file.id, roll_file.date, 'None', 'None'))
